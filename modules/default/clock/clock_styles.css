@@ -1,3 +1,14 @@
+
+@font-face {
+  font-family: 'LibreBarcode39ExtendedText-Regular';
+  src: url('../newsfeed/fonts/LibreBarcode39ExtendedText-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Alien-Encounters-Regular';
+  src: url('../newsfeed/fonts/Alien-Encounters-Regular.ttf') format('truetype');
+}
+
 .clock-grid {
   display: inline-flex;
   gap: 15px;
@@ -80,6 +91,14 @@
   padding: 38% 1px 0 0; /* indicator length & thickness */
   background: var(--color-text);
   transform-origin: 50% 100%;
+}
+
+.module.clock .time,
+.module.clock .digit {
+    font-family: 'Alien-Encounters-Regular', sans-serif !important;
+}
+.module.clock * {
+    font-family: 'Alien-Encounters-Regular', sans-serif;
 }
 
 .module.clock .sun,

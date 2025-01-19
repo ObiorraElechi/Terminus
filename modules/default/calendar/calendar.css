@@ -22,3 +22,17 @@
   text-align: right;
   vertical-align: top;
 }
+
+@font-face {
+  font-family: 'LibreBarcode39ExtendedText-Regular';
+  src: url('../newsfeed/fonts/LibreBarcode39ExtendedText-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Alien-Encounters-Regular';
+  src: url('../newsfeed/fonts/Alien-Encounters-Regular.ttf') format('truetype');
+}
+
+.module.calendar, .module.calendar * {
+  font-family: 'Alien-Encounters-Regular', sans-serif !important;
+}

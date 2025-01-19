@@ -47,3 +47,34 @@
 .weather tr.colored .max-temp {
   color: #ff8e99;
 }
+
+/* Apply a custom font to the weather module */
+@font-face {
+  font-family: 'Alien-Encounters-Regular';
+  src: url('../modules/default/newsfeed/fonts/Alien-Encounters-Regular.ttf') format('truetype');
+}
+/* Apply custom font to text elements */
+
+.module.weather .light.bright, 
+.module.weather .module-header,
+.module.weather .normal.medium {
+  font-family: 'Alien-Encounters-Regular', sans-serif !important;
+}
+
+.module.weather .currentweather,
+.module.weather .weather-forecast,
+.module.weather .temperature,
+.module.weather .day {
+  font-family: 'Alien-Encounters-Regular', sans-serif !important;
+}
+
+/* Exclude icon-related elements 
+.module.weather .weathericon,
+.module.weather .fa-home,
+.module.weather .fa,
+.module.weather .wi-icon
+.module.weather .wi {
+  font-family: 'FontAwesome', sans-serif !important; 
+}
+
+*/

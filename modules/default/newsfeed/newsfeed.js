@@ -1,9 +1,11 @@
 Module.register("newsfeed", {
 	// Default module config.
+	
 	defaults: {
 		feeds: [
 			{
 				title: "New York Times",
+				
 				url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
 				encoding: "UTF-8" //ISO-8859-1
 			}
@@ -35,7 +37,7 @@ Module.register("newsfeed", {
 		logFeedWarnings: false,
 		dangerouslyDisableAutoEscaping: false
 	},
-
+	
 	getUrlPrefix (item) {
 		if (item.useCorsProxy) {
 			return `${location.protocol}//${location.host}${config.basePath}cors?url=`;
@@ -51,7 +53,7 @@ Module.register("newsfeed", {
 
 	//Define required styles.
 	getStyles () {
-		return ["newsfeed.css"];
+		return ["newsTicker.css"];
 	},
 
 	// Define required translations.
@@ -81,25 +83,20 @@ Module.register("newsfeed", {
 	},
 
 	// Override socket notification handler.
-	socketNotificationReceived (notification, payload) {
+	socketNotificationReceived(notification, payload) {
+		console.log("Socket notification received:", notification);
+	
 		if (notification === "NEWS_ITEMS") {
-			this.generateFeed(payload);
-
-			if (!this.loaded) {
-				if (this.config.hideLoading) {
-					this.show();
-				}
-				this.scheduleUpdateInterval();
-			}
-
-			this.loaded = true;
-			this.error = null;
+			console.log("Received news items:", payload);
+			this.newsItems = payload;
+			this.updateDom();
 		} else if (notification === "NEWSFEED_ERROR") {
-			this.error = this.translate(payload.error_type);
-			this.scheduleUpdateInterval();
+			console.error("Newsfeed error received:", payload);
 		}
 	},
-
+	
+	
+	
 	//Override fetching of template name
 	getTemplate () {
 		if (this.config.feedUrl) {
@@ -182,6 +179,7 @@ Module.register("newsfeed", {
 	 * @param {object} feeds An object with feeds returned by the node helper.
 	 */
 	generateFeed (feeds) {
+		
 		let newsItems = [];
 		for (let feed in feeds) {
 			const feedItems = feeds[feed];
@@ -194,6 +192,7 @@ Module.register("newsfeed", {
 				}
 			}
 		}
+		
 		newsItems.sort(function (a, b) {
 			const dateA = new Date(a.pubdate);
 			const dateB = new Date(b.pubdate);
@@ -418,11 +417,41 @@ Module.register("newsfeed", {
 		this.config.showFullArticle = !this.isShowingDescription;
 		// make bottom bar align to top to allow scrolling
 		if (this.config.showFullArticle === true) {
-			document.getElementsByClassName("region bottom bar")[0].classList.add("newsfeed-fullarticle");
+			document.getElementsByClassName("region bottom bar")[0].classList.add("#news-ticker .ticker-wrapper");
 		}
 		clearInterval(this.timer);
 		this.timer = null;
 		Log.debug(`${this.name} - showing ${this.isShowingDescription ? "article description" : "full article"}`);
 		this.updateDom(100);
+	},
+
+	getDom: function () {
+		console.log("Generating DOM for newsfeed...");
+	
+		const wrapper = document.createElement("div");
+		wrapper.id = "news-ticker";
+		wrapper.className = "newsTicker";
+	
+		const tickerWrapper = document.createElement("div");
+		tickerWrapper.className = "ticker-wrapper";
+	
+		if (this.newsItems && this.newsItems.length > 0) {
+			console.log("News items found:", this.newsItems.length);
+			this.newsItems.forEach((item) => {
+				const newsDiv = document.createElement("div");
+				newsDiv.className = "ticker-item";
+				newsDiv.textContent = item.title;
+				tickerWrapper.appendChild(newsDiv);
+			});
+		} else {
+			console.log("No news items available.");
+			tickerWrapper.textContent = "Loading news...";
+		}
+	
+		wrapper.appendChild(tickerWrapper);
+		console.log("DOM generated:", wrapper);
+		return wrapper;
 	}
+	
+	
 });

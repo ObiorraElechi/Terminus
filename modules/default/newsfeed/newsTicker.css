@@ -1,0 +1,77 @@
+#news-ticker {
+    overflow: hidden; /* Hide items outside the container */
+    white-space: nowrap; /* Prevent text wrapping */
+    width: 100%; /* Full container width */
+    font-size: 60px; /* Adjust as needed */
+    position: relative; /* Necessary for proper positioning */
+}
+
+.ticker-wrapper {
+    display: inline-block; /* Allows horizontal scrolling */
+    animation: scroll-left 120s linear infinite; /* Smooth scrolling */
+}
+
+.ticker-item {
+    display: inline-block; /* Prevents stacking */
+    padding: 0 20px; /* Space between items */
+    color: #fff; /* White text */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%); /* Start inside the screen */
+    }
+    100% {
+        transform: translateX(-100%); /* Scroll off to the left */
+    }
+}
+/*
+@keyframes glitch {
+    0% {
+        text-shadow: 2px 2px #ff0055, -2px -2px #00ffee;
+        transform: translateX(0) translateY(0);
+    }
+    
+    50% {
+        text-shadow: 2px -2px #ff0055, -2px 2px #00ffee;
+        transform: translateX(2px) translateY(2px);
+    }
+    53% {
+        text-shadow: 2px 2px #ff0055, -2px -2px #00ffee;
+        transform: translateX(0) translateY(0);
+    }
+    55% {
+        text-shadow: -2px 2px #ff0055, 2px -2px #00ffee;
+        transform: translateX(-1px) translateY(-1px);
+    }
+    100% {
+        text-shadow: 2px 2px #ff0055, -2px -2px #00ffee;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+.ticker-item {
+    animation: glitch 1s infinite;
+}
+
+*/
+
+@font-face {
+    font-family: 'LibreBarcode39ExtendedText-Regular';
+    src: url('./fonts/LibreBarcode39ExtendedText-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Alien-Encounters-Regular';
+    src: url('./fonts/Alien-Encounters-Regular.ttf') format('truetype');
+}
+
+#news-ticker {
+    font-family: 'Alien-Encounters-Regular', sans-serif;
+}
+
+
+#news-ticker:hover .ticker-wrapper {
+    animation-play-state: paused; /* Pause scrolling on hover */
+}
+
