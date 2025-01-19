@@ -1,6 +1,9 @@
 ## Acknowledgements
 
-This project is built upon the [MagicMirror²](https://github.com/MichMich/MagicMirror) open-source framework, licensed under the [MIT License](https://github.com/MichMich/MagicMirror/blob/main/LICENSE).
+This project is built upon the [MagicMirror²](https://github.com/MichMich/MagicMirror) open-source framework, licensed under the [MIT License](https://github.com/MagicMirrorOrg/MagicMirror/blob/master/LICENSE.md).
+
+## Terminus
+Terminus is software for a smart mirror that integrates a default, up-to-date dashboard with a terminal-like user interface with voice activation and AI. Developed using the MagicMirror² source code, this project will utilise wake-word detection and LLama2 for AI integration.
 
 ## Project Goals
 
